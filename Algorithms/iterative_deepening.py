@@ -2,6 +2,8 @@ import time
 import numpy as np
 from pettingzoo.classic import connect_four_v3
 
+from Algorithms.Util.board import Board
+
 # Basic constants
 ROWS = 6
 COLS = 7
@@ -12,65 +14,6 @@ MAX_SEARCH_DEPTH = 8        # hard cap for depth (increase later as needed)
 TIME_LIMIT_SEC = 2.0        # per-move time limit (can set to None to disable)
 
 WIN_SCORE = 10_000          # terminal win/lose magnitude
-
-
-class Board:
-    """
-    Minimal board for search.
-    Representation:
-      1  = current player (maximizer)
-     -1  = opponent
-      0  = empty
-    """
-    def __init__(self, grid=None):
-        self.grid = np.zeros((ROWS, COLS), dtype=np.int8) if grid is None else grid.copy()
-        # Precompute current heights in each column (how many pieces already placed)
-        self.heights = np.array([np.count_nonzero(self.grid[:, c]) for c in range(COLS)], dtype=np.int8)
-
-    def legal_moves(self):
-        """Return list of legal columns in natural order (no move ordering)."""
-        return [c for c in range(COLS) if self.heights[c] < ROWS]
-
-    def play(self, col, player):
-        """Drop a disc for 'player' (1 or -1). Return the row index used."""
-        r = ROWS - 1 - self.heights[col]
-        self.grid[r, col] = player
-        self.heights[col] += 1
-        return r
-
-    def undo(self, col):
-        """Undo last move in the given column."""
-        if self.heights[col] == 0:
-            return
-        r = ROWS - self.heights[col]
-        self.grid[r, col] = 0
-        self.heights[col] -= 1
-
-    def is_full(self):
-        """Check whether board is full (draw if no winner)."""
-        return all(self.heights[c] == ROWS for c in range(COLS))
-
-    def is_win_at(self, row, col):
-        """Check 4-in-a-row for the stone at (row, col)."""
-        player = self.grid[row, col]
-        if player == 0:
-            return False
-        dirs = [(0,1),(1,0),(1,1),(1,-1)]
-        for dr, dc in dirs:
-            count = 1
-            # forward
-            rr, cc = row+dr, col+dc
-            while 0 <= rr < ROWS and 0 <= cc < COLS and self.grid[rr, cc] == player:
-                count += 1
-                rr += dr; cc += dc
-            # backward
-            rr, cc = row-dr, col-dc
-            while 0 <= rr < ROWS and 0 <= cc < COLS and self.grid[rr, cc] == player:
-                count += 1
-                rr -= dr; cc -= dc
-            if count >= CONNECT_N:
-                return True
-        return False
 
 # Simple evaluation function
 def evaluate(b: Board) -> int:
@@ -178,7 +121,7 @@ def minimax(b: Board, depth: int, player: int, start_time: float, time_limit: fl
         return best_score, best_move
 
 # Iterative Deepening wrapper
-def iterative_deepening_move(b: Board, max_depth=MAX_SEARCH_DEPTH, time_limit=TIME_LIMIT_SEC):
+def iterative_deepening_move(b: Board, max_depth: int, time_limit: float):
     """
     Basic Iterative Deepening:
       for depth = 1..max_depth:
@@ -190,12 +133,14 @@ def iterative_deepening_move(b: Board, max_depth=MAX_SEARCH_DEPTH, time_limit=TI
     """
     start = time.time()
     best_move = None
+    best_score = None
 
     for depth in range(1, max_depth + 1):
         try:
             score, move = minimax(b, depth, player=1, start_time=start, time_limit=time_limit)
             if move is not None:
                 best_move = move
+                best_score = score
             # Optional: early exit if score is a forced win/lose at current depth
             if abs(score) >= WIN_SCORE * depth:
                 break
@@ -206,57 +151,4 @@ def iterative_deepening_move(b: Board, max_depth=MAX_SEARCH_DEPTH, time_limit=TI
     if best_move is None:
         legals = b.legal_moves()
         best_move = legals[0] if legals else 0
-    return best_move
-
-# Convert PettingZoo obs -> Board
-def board_from_obs(obs):
-    """
-    PettingZoo observation planes are (6,7,2): [current_player, other_player].
-    We map them to 1 / -1 from the perspective of the agent whose turn it is.
-    """
-    planes = obs["observation"]
-    my_plane = planes[:, :, 0]
-    opp_plane = planes[:, :, 1]
-    grid = np.zeros((ROWS, COLS), dtype=np.int8)
-    grid[my_plane == 1] = 1
-    grid[opp_plane == 1] = -1
-    return Board(grid)
-
-# Main: integrate with PettingZoo
-HUMAN = "player_0"  # you are the first player
-
-env = connect_four_v3.env(render_mode="human")
-env.reset()
-
-for agent in env.agent_iter():
-    obs, reward, terminated, truncated, info = env.last()
-    if terminated or truncated:
-        env.step(None)
-        continue
-
-    if agent == HUMAN:
-        mask = obs["action_mask"]
-        legal_cols = [i for i, ok in enumerate(mask) if ok]
-        col = int(input(f"Legal columns: {legal_cols}, enter column number: "))
-        while col not in legal_cols:
-            col = int(input(f"Invalid! Choose from {legal_cols}: "))
-        action = col
-    else:
-        mask = obs["action_mask"]
-        legal_cols = [i for i, ok in enumerate(mask) if ok]
-
-        # Build internal board from the agent's POV
-        b = board_from_obs(obs)
-
-        # Run basic Iterative Deepening with plain minimax
-        move = iterative_deepening_move(b, max_depth=MAX_SEARCH_DEPTH, time_limit=TIME_LIMIT_SEC)
-
-        # Safety: ensure move is legal according to the env mask
-        if move not in legal_cols:
-            move = legal_cols[0]
-
-        action = int(move)
-
-    env.step(action)
-
-env.close()
+    return best_move, best_score
