@@ -11,3 +11,6 @@ class Algorithm:
     # returns tuple of (move, score)
     def make_move(self, b: Board, is_debug: bool) -> tuple[int, int | None]:
         pass
+
+    def set_evaluation_function(self, function):
+        pass

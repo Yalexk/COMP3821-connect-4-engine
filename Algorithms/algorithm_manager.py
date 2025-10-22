@@ -1,6 +1,7 @@
 from enum import Enum
 from Algorithms.random_algorithm import Random_Algorithm
 from Algorithms.minimax_algorithm import Minimax_Algorithm
+from Algorithms.alpha_beta import Alpha_Beta_Algorithm
 from Algorithms.algorithm import Algorithm
 from Algorithms.Util.board import Board
 
@@ -24,6 +25,8 @@ class Algorithm_Manager:
             self.current_algorithm = Random_Algorithm(max_search_depth, max_time_limit)
         if (type == Algorithm_Types.MINIMAX):
             self.current_algorithm = Minimax_Algorithm(max_search_depth, max_time_limit)
+        if (type == Algorithm_Types.ABPRUNING):
+            self.current_algorithm = Alpha_Beta_Algorithm(max_search_depth, max_time_limit)
 
     def set_evaluation_function():
         pass

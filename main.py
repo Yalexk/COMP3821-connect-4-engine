@@ -12,7 +12,7 @@ def select_options() -> tuple[str, int, bool]:
     is_debug = None
 
     valid_bool_input = ["Y", "N", "YES", "NO"]
-    vaild_algorithm_input = ["0", "1"]
+    vaild_algorithm_input = ["0", "1", "2"]
 
     # Choose whether the player goes first or second
     first_move_qry = input("Player first move? [y/n]: ").capitalize()
@@ -24,10 +24,17 @@ def select_options() -> tuple[str, int, bool]:
         player_turn = "player_1"
     
     # Choose algorithm to use for the agent
+    algorithm_str = "Implemented Algorithms: \n" \
+            "0: Random" \
+            "\n1: Minimax" \
+            "\n2: Alpha-Beta Pruning" \
+            "\nSelect an Algorithm: "
     algorithm_id = None
-    algorithm_qry = input("Implemented Algorithms: \n0: Random\n1: Minimax\nSelect an Algorithm: ")
+    algorithm_qry = input(algorithm_str)
     while algorithm_qry not in vaild_algorithm_input:
-        algorithm_qry = input("Invalid input, try again.\nImplemented Algorithms: \n0: Random\n1: Minimax\nSelect an Algorithm: ")
+        algorithm_qry = input(
+            "Invalid input, try again.\n" + algorithm_str
+        )
     algorithm_id = int(algorithm_qry)
 
     # Choose whether algorithms should be run in debug mode
