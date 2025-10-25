@@ -66,15 +66,16 @@ def main():
         if agent == player_turn:
             mask = obs["action_mask"]
             legal_cols = [i for i, ok in enumerate(mask) if ok]
-            col = None
-            player_input = input(f"Legal columns: {legal_cols}, enter column number: ")
-            while player_input not in ["0", "1", "2", "3", "4", "5", "6"]:
-                player_input = input(f"Invalid! Choose from {legal_cols}: ")
-            col = int(player_input)
-            while col not in legal_cols:
-                player_input = input(f"Invalid! Choose from {legal_cols}: ")
-                while player_input not in ["0", "1", "2", "3", "4", "5", "6"]:
-                    player_input = input(f"Invalid! Choose from {legal_cols}: ")
+            while True:
+                player_input = input(f"Legal columns: {legal_cols}, enter column number: ")
+                if not player_input.isdigit():
+                    print("Invalid! Please enter a number 0–6.")
+                    continue
+                col = int(player_input)
+                if col in legal_cols:
+                    break
+                else:
+                    print(f"Invalid! Choose from {legal_cols}.")
             action = col
         else:
             mask = obs["action_mask"]
