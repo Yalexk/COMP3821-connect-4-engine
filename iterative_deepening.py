@@ -2,53 +2,57 @@ import time
 import numpy as np
 from pettingzoo.classic import connect_four_v3
 
-# Basic constants
+# ===== Basic =====
 ROWS = 6
 COLS = 7
 CONNECT_N = 4
 
-# Iterative deepening settings
-MAX_SEARCH_DEPTH = 8        # hard cap for depth (increase later as needed)
-TIME_LIMIT_SEC = 2.0        # per-move time limit (can set to None to disable)
+# Iterative deppening settings
+MAX_SEARCH_DEPTH = 8
+TIME_LIMIT_SEC = 2.0
 
-WIN_SCORE = 10_000          # terminal win/lose magnitude
-
+WIN_SCORE = 10000
 
 class Board:
     """
-    Minimal board for search.
-    Representation:
-      1  = current player (maximizer)
-     -1  = opponent
-      0  = empty
+    简化棋盘（供搜索使用）。
+    表示约定：
+      +1 表示当前行动方的棋子（极大层）
+      -1 表示对手的棋子（极小层）
+       0 空位
     """
     def __init__(self, grid=None):
-        self.grid = np.zeros((ROWS, COLS), dtype=np.int8) if grid is None else grid.copy()
-        # Precompute current heights in each column (how many pieces already placed)
+        if grid is None:
+            self.grid = np.zeros((ROWS, COLS), dtype=np.int8)
+        else:
+            self.grid = grid.copy()
         self.heights = np.array([np.count_nonzero(self.grid[:, c]) for c in range(COLS)], dtype=np.int8)
-
+        
     def legal_moves(self):
         """Return list of legal columns in natural order (no move ordering)."""
         return [c for c in range(COLS) if self.heights[c] < ROWS]
 
     def play(self, col, player):
         """Drop a disc for 'player' (1 or -1). Return the row index used."""
-        r = ROWS - 1 - self.heights[col]
-        self.grid[r, col] = player
+        row = ROWS - 1 - self.heights[col]
+        self.grid[row, col] = player
         self.heights[col] += 1
-        return r
+        return row
 
     def undo(self, col):
         """Undo last move in the given column."""
         if self.heights[col] == 0:
             return
-        r = ROWS - self.heights[col]
-        self.grid[r, col] = 0
+        row = ROWS - self.heights[col]
+        self.grid[row, col] = 0
         self.heights[col] -= 1
 
     def is_full(self):
         """Check whether board is full (draw if no winner)."""
-        return all(self.heights[c] == ROWS for c in range(COLS))
+        for i in range(COLS):
+            if self.heights[i] != ROWS:
+                return False
+        return True
 
     def is_win_at(self, row, col):
         """Check 4-in-a-row for the stone at (row, col)."""
@@ -72,20 +76,27 @@ class Board:
                 return True
         return False
 
-# Simple evaluation function
+
 def evaluate(b: Board) -> int:
     """
-    Heuristic from the perspective of the side to move (= +1):
-    - Mild center column preference.
-    - Window scoring over all length-4 slices (horizontal/vertical/diagonals).
-    This is intentionally simple for a baseline.
+    score = center_score + sum(4-length_window_score)
+    center_score = k * (#my_center_disc - #opp_center_disc)        (center col)
+    4-length_window_score = 
+     * WIN_SCORE            (#my_disc, #opp_disc, #empty) = (4,0,0)
+     * 30                   (#my_disc, #opp_disc, #empty) = (3,0,1)
+     * 6                    (#my_disc, #opp_disc, #empty) = (2,0,2)
+     * -6                   (#my_disc, #opp_disc, #empty) = (0,2,2)
+     * -35                  (#my_disc, #opp_disc, #empty) = (0,3,1)
+     * -WIN_SCORE           (#my_disc, #opp_disc, #empty) = (0,4,0)
+     * 0                    otherwise
     """
+    k = 2 # How importent the center is
+
     score = 0
 
-    # Center column preference
     center = COLS // 2
-    score += 2 * (np.count_nonzero(b.grid[:, center] == 1) - np.count_nonzero(b.grid[:, center] == -1))
-
+    score += k * (np.count_nonzero(b.grid[:, center] == 1) - np.count_nonzero(b.grid[:, center] == -1))
+    
     def window_score(window):
         myc = np.count_nonzero(window == 1)
         opc = np.count_nonzero(window == -1)
@@ -122,10 +133,11 @@ def evaluate(b: Board) -> int:
 
     return score
 
-# Plain Minimax (no alpha-beta)
+
 class TimeUp(Exception):
     """Raised when the per-move time limit is exceeded."""
     pass
+
 
 def minimax(b: Board, depth: int, player: int, start_time: float, time_limit: float | None):
     """
@@ -135,14 +147,12 @@ def minimax(b: Board, depth: int, player: int, start_time: float, time_limit: fl
       - Time check at each entry to allow iterative deepening to stop cleanly.
     Returns (score, best_move).
     """
-    # Time control
     if time_limit is not None and (time.time() - start_time) >= time_limit:
         raise TimeUp()
-
     # Terminal / depth cut
     if depth == 0 or b.is_full():
         return evaluate(b) * player, None
-
+    
     legal = b.legal_moves()
     if not legal:
         return 0, None
@@ -177,16 +187,14 @@ def minimax(b: Board, depth: int, player: int, start_time: float, time_limit: fl
                 best_move = col
         return best_score, best_move
 
-# Iterative Deepening wrapper
-def iterative_deepening_move(b: Board, max_depth=MAX_SEARCH_DEPTH, time_limit=TIME_LIMIT_SEC):
+def iterative_deepening_move(b: Board, max_depth=MAX_SEARCH_DEPTH, time_limit=TIME_LIMIT_SEC) -> int:
     """
-    Basic Iterative Deepening:
-      for depth = 1..max_depth:
+    for depth = 1..max_depth:
         run plain minimax to that depth
         remember the best move
-        stop if time runs out (return last completed depth's move)
+        if time runs out: stop and return the current best move
 
-    Returns chosen move (column index).
+    Returns the best move (col).
     """
     start = time.time()
     best_move = None
@@ -202,14 +210,14 @@ def iterative_deepening_move(b: Board, max_depth=MAX_SEARCH_DEPTH, time_limit=TI
         except TimeUp:
             break
 
-    # Fallback in case nothing was found (shouldn't happen): pick first legal
+    # shouldn't happen
     if best_move is None:
         legals = b.legal_moves()
         best_move = legals[0] if legals else 0
     return best_move
 
-# Convert PettingZoo obs -> Board
-def board_from_obs(obs):
+
+def board_from_obs(obs) -> Board:
     """
     PettingZoo observation planes are (6,7,2): [current_player, other_player].
     We map them to 1 / -1 from the perspective of the agent whose turn it is.
@@ -222,7 +230,8 @@ def board_from_obs(obs):
     grid[opp_plane == 1] = -1
     return Board(grid)
 
-# Main: integrate with PettingZoo
+# ====== Main and env ======
+
 HUMAN = "player_0"  # you are the first player
 
 env = connect_four_v3.env(render_mode="human")
