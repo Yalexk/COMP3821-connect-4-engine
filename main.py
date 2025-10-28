@@ -12,8 +12,8 @@ from Display import (
     animate_computer_move
 )
 
-MAX_SEARCH_DEPTH = 8        # hard cap for depth (increase later as needed)
-TIME_LIMIT_SEC = 2.0        # per-move time limit (can set to None to disable)
+MAX_SEARCH_DEPTH = 12        # hard cap for depth (increase later as needed) # intead of 8 for TT
+TIME_LIMIT_SEC = 5        # per-move time limit (can set to None to disable) # instead of 2.0 for TT
 
 # Interface for player to select options before starting game
 def select_options() -> tuple[str, int, bool]:
@@ -21,7 +21,7 @@ def select_options() -> tuple[str, int, bool]:
     is_debug = None
 
     valid_bool_input = ["Y", "N", "YES", "NO"]
-    vaild_algorithm_input = ["0", "1"]
+    vaild_algorithm_input = ["0", "1", "2"]
 
     # Choose whether the player goes first or second
     first_move_qry = input("Player first move? [y/n]: ").capitalize()
@@ -34,9 +34,9 @@ def select_options() -> tuple[str, int, bool]:
 
     # Choose algorithm to use for the agent
     algorithm_id = None
-    algorithm_qry = input("Implemented Algorithms: \n0: Random\n1: Minimax\nSelect an Algorithm: ")
+    algorithm_qry = input("Implemented Algorithms: \n0: Random\n1: Minimax\n2: Minimax with Transposition Table\nSelect an Algorithm: ")
     while algorithm_qry not in vaild_algorithm_input:
-        algorithm_qry = input("Invalid input, try again.\nImplemented Algorithms: \n0: Random\n1: Minimax\nSelect an Algorithm: ")
+        algorithm_qry = input("Invalid input, try again.\nImplemented Algorithms: \n0: Random\n1: Minimax\n2: Minimax with Transposition Table\nSelect an Algorithm: ")
     algorithm_id = int(algorithm_qry)
 
     # Choose whether algorithms should be run in debug mode
