@@ -21,6 +21,12 @@ class Board:
         """Return list of legal columns in natural order (no move ordering)."""
         return [c for c in range(COLS) if self.heights[c] < ROWS]
 
+    def centre_legal_moves(self):
+        """Return list of legal columns going out from centre. (centre ordering)."""
+        # It may be more beneficial to have a right-first centre ordering in some cases
+        centre_order = [3, 2, 4, 1, 5, 0, 6] 
+        return [c for c in centre_order if self.heights[c] < ROWS]
+
     def play(self, col, player):
         """Drop a disc for 'player' (1 or -1). Return the row index used."""
         r = ROWS - 1 - self.heights[col]
