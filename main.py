@@ -75,13 +75,9 @@ def main():
             legal_cols = [i for i, ok in enumerate(mask) if ok]
             col = None
             player_input = input(f"Legal columns: {legal_cols}, enter column number: ")
-            while player_input not in ["0", "1", "2", "3", "4", "5", "6"]:
+            while player_input not in [str(i) for i in legal_cols]:
                 player_input = input(f"Invalid! Choose from {legal_cols}: ")
             col = int(player_input)
-            while col not in legal_cols:
-                player_input = input(f"Invalid! Choose from {legal_cols}: ")
-                while player_input not in ["0", "1", "2", "3", "4", "5", "6"]:
-                    player_input = input(f"Invalid! Choose from {legal_cols}: ")
             action = col
         else:
             mask = obs["action_mask"]
