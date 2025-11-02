@@ -94,12 +94,9 @@ def main():
         if agent == player_turn:
             mask = obs["action_mask"]
             legal_cols = [i for i, ok in enumerate(mask) if ok]
-            col = None
-            player_input = input(f"Legal columns: {legal_cols}, enter column number: ")
-            while player_input not in [str(i) for i in legal_cols]:
-                player_input = input(f"Invalid! Choose from {legal_cols}: ")
-            col = int(player_input)
-            action = col
+            action = get_player_move_from_pygame(screen, font, obs, legal_cols, agent, player_turn)
+            # Animate the disk drop
+            animate_disk_drop(screen, font, obs, action, agent, player_turn)
         else:
             mask = obs["action_mask"]
             legal_cols = [i for i, ok in enumerate(mask) if ok]
