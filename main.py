@@ -21,7 +21,7 @@ def select_options() -> tuple[str, int, bool]:
     is_debug = None
 
     valid_bool_input = ["Y", "N", "YES", "NO"]
-    vaild_algorithm_input = ["0", "1", "2"]
+    vaild_algorithm_input = ["0", "1", "2", "3"]
 
     # Choose whether the player goes first or second
     first_move_qry = input("Player first move? [y/n]: ").capitalize()
@@ -37,6 +37,7 @@ def select_options() -> tuple[str, int, bool]:
             "0: Random" \
             "\n1: Minimax" \
             "\n2: Alpha-Beta Pruning" \
+            "\n3: Transposition Table" \
             "\nSelect an Algorithm: "
     algorithm_id = None
     algorithm_qry = input(algorithm_str)
@@ -93,18 +94,12 @@ def main():
         if agent == player_turn:
             mask = obs["action_mask"]
             legal_cols = [i for i, ok in enumerate(mask) if ok]
-<<<<<<< HEAD
             col = None
             player_input = input(f"Legal columns: {legal_cols}, enter column number: ")
             while player_input not in [str(i) for i in legal_cols]:
                 player_input = input(f"Invalid! Choose from {legal_cols}: ")
             col = int(player_input)
             action = col
-=======
-            action = get_player_move_from_pygame(screen, font, obs, legal_cols, agent, player_turn)
-            # Animate the disk drop
-            animate_disk_drop(screen, font, obs, action, agent, player_turn)
->>>>>>> main
         else:
             mask = obs["action_mask"]
             legal_cols = [i for i, ok in enumerate(mask) if ok]
