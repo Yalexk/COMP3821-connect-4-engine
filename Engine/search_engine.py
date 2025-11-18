@@ -70,7 +70,9 @@ class SearchEngine:
                 score = self.search(board, depth - 1, alpha, beta, False, ctx)
                 board.undo(m)
 
-                value = max(value, score)
+                if score > value:
+                    value = score
+                    best_move = m
 
                 if ctx.use_ab:
                     alpha = max(alpha, value)
@@ -83,7 +85,9 @@ class SearchEngine:
                 score = self.search(board, depth - 1, alpha, beta, True, ctx)
                 board.undo(m)
 
-                value = min(value, score)
+                if score < value:
+                    value = score
+                    best_move = m
 
                 if ctx.use_ab:
                     beta = min(beta, value)
