@@ -16,7 +16,7 @@ import Engine.config_constants as cc
 def ascii_print_board(obs):
     """Print a simple 6x7 ASCII board for AI vs AI."""
     grid = board_from_obs(obs).grid
-    symbols = {0: ".", 1: "X", -1: "O"}  # fix: -1 is O
+    symbols = {0: ".", 1: "X", -1: "O"} 
 
     print("\n  0 1 2 3 4 5 6")
     for row in grid:
@@ -78,16 +78,37 @@ def main():
     env = connect_four_v3.env(render_mode=None)
     env.reset()
 
-    obs, reward, terminated, truncated, info = env.last()
+    try:
+        obs, reward, terminated, truncated, info = env.last()
+    except Exception:
+        obs, reward, terminated, truncated, info = None, None, False, False, {}
+
+    # Track last agent & last reward to avoid KeyError after loop
+    last_agent = None
+    last_reward = None
+    move_count = 0
 
     for agent in env.agent_iter():
-        obs, reward, terminated, truncated, info = env.last()
-        
+        # get the latest observation/reward for the current agent
+        try:
+            obs, reward, terminated, truncated, info = env.last()
+        except Exception:
+            # defensive: if env.last() somehow fails, break out
+            obs, reward, terminated, truncated, info = None, None, True, True, {}
+            last_agent = agent
+            last_reward = None
+            break
+
+        # remember who we are on and what the reward was (used later)
+        last_agent = agent
+        last_reward = reward
+
         if terminated or truncated:
+            # terminal step for this agent; advance with None
             env.step(None)
             continue
 
-        # Determine algorithm
+        # Choose algorithm according to agent
         if agent == "player_0":
             move, score = algorithm_manager1.make_move(board_from_obs(obs))
         else:
@@ -96,13 +117,51 @@ def main():
         mask = obs["action_mask"]
         legal_cols = [i for i, ok in enumerate(mask) if ok]
 
-        # Safety
+        # Safety: if algorithm returned illegal move, pick first legal
         if move not in legal_cols:
             move = legal_cols[0]
 
         env.step(int(move))
+        move_count += 1
 
+    # After loop: determine winner robustly
     ascii_print_board(obs)
+    print("Game Over!")
+
+    winner = None
+    # use the last observed reward & agent captured in-loop
+    if last_reward is not None and last_agent is not None:
+        if last_reward == 1:
+            winner = last_agent
+        elif last_reward == -1:
+            winner = "player_1" if last_agent == "player_0" else "player_0"
+        else:
+            winner = None
+    else:
+        # use env.rewards dict if available
+        try:
+            rewards = getattr(env, "rewards", {})
+            r0 = rewards.get("player_0", 0)
+            r1 = rewards.get("player_1", 0)
+            if r0 > r1:
+                winner = "player_0"
+            elif r1 > r0:
+                winner = "player_1"
+            else:
+                winner = None
+        except Exception:
+            winner = None
+
+    if winner:
+        wmgr = algorithm_manager1 if winner == "player_0" else algorithm_manager2
+        alg = getattr(wmgr, "algorithm_type", None)
+        # If algorithm_type is an enum, .name is usually present; else str()
+        alg_name = alg.name if hasattr(alg, "name") else str(alg)
+        print(f"Winner: {winner} (Algorithm {alg_name})")
+    else:
+        print("Result: Draw")
+
+    print(f"Total moves made: {move_count}")
 
 
 if __name__ == "__main__":
