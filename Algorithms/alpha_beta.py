@@ -8,14 +8,18 @@ class Alpha_Beta_Algorithm(Algorithm):
     max_depth: int
     time_limit: float
     eval_func: Callable[[Board], int]
+    searched_nodes: int
 
     def __init__(self, depth, time):
         self.max_depth = depth
         self.time_limit = time
         self.eval_func = window_eval
+        self.searched_nodes = 0
 
     def make_move(self, b: Board, is_debug: bool):
-        return iterative_deepening_move(b, self.max_depth, self.time_limit, is_debug)
+        best_move, best_score, n_searched = iterative_deepening_move(b, self.max_depth, self.time_limit, is_debug)
+        self.searched_nodes = n_searched
+        return best_move, best_score
     
     def set_evaluation_function(self, function: Callable[[Board], int]):
         self.eval_func = function
@@ -23,10 +27,13 @@ class Alpha_Beta_Algorithm(Algorithm):
     def evaluate(self, b: Board):
         return self.eval_func(b)
     
+    def get_nodes_searched(self):
+        return self.searched_nodes
     
     # Alpha is the highest possible move in siblings (-inf if possibility unknown)
     # Beta is the lowest possible move in siblings (inf if possibility unknown)
     def alpha_beta(self, b: Board, depth: int, player: int, alpha: int, beta: int, start_time: float, time_limit: float | None, debug: bool):
+        self.searched_nodes += 1
         # Time control
         if time_limit is not None and (time.time() - start_time) >= time_limit:
             raise TimeUp()
@@ -137,13 +144,16 @@ def iterative_deepening_move(b: Board, max_depth: int, time_limit: float, debug:
     best_score = None
 
     for depth in range(1, max_depth + 1):
+        searched_nodes = 0
         try:
             abalgo = Alpha_Beta_Algorithm(max_depth, time_limit)
+            abalgo.searched_nodes = 0
             score, move = abalgo.alpha_beta(b, depth, 1, -10**12, 10**12, start_time=start, time_limit=time_limit, debug=debug)
             if move is not None:
                 best_move = move
                 best_score = score
             # Optional: early exit if score is a forced win/lose at current depth
+            searched_nodes = abalgo.get_nodes_searched()
             if abs(score) >= WIN_SCORE * depth:
                 break
         except TimeUp:
@@ -153,4 +163,4 @@ def iterative_deepening_move(b: Board, max_depth: int, time_limit: float, debug:
     if best_move is None:
         legals = b.legal_moves()
         best_move = legals[0] if legals else 0
-    return best_move, best_score
+    return best_move, best_score, searched_nodes

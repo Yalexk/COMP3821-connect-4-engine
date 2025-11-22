@@ -40,3 +40,6 @@ class Algorithm_Manager:
 
     def make_move(self, b: Board) -> tuple[int, int]:
         return self.current_algorithm.make_move(b, self.debug_mode)
+    
+    def get_nodes_searched(self):
+        return self.current_algorithm.get_nodes_searched()

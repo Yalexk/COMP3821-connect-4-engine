@@ -83,19 +83,21 @@ def minimax(b: Board, depth: int, player: int, start_time: float, time_limit: fl
       - Time check at each entry to allow iterative deepening to stop cleanly.
     Returns (score, best_move).
     """
+
     # Time control
     if time_limit is not None and (time.time() - start_time) >= time_limit:
         raise TimeUp()
 
     # Terminal / depth cut
     if depth == 0 or b.is_full():
-        return evaluate(b) * player, None
+        return evaluate(b) * player, None, 1
 
     legal = b.legal_moves()
     if not legal:
-        return 0, None
+        return 0, None, 0
 
     best_move = None
+    search_total = 0
     if player == 1:
         # Maximizing
         best_score = -10**12
@@ -103,13 +105,14 @@ def minimax(b: Board, depth: int, player: int, start_time: float, time_limit: fl
             row = b.play(col, 1)
             if b.is_win_at(row, col):
                 b.undo(col)
-                return WIN_SCORE * depth, col  # prefer faster win by depth scaling
-            score, _ = minimax(b, depth-1, -1, start_time, time_limit)
+                return WIN_SCORE * depth, col,  search_total + 1 # prefer faster win by depth scaling
+            score, m, searched = minimax(b, depth-1, -1, start_time, time_limit)
+            search_total += searched
             b.undo(col)
             if score > best_score:
                 best_score = score
                 best_move = col
-        return best_score, best_move
+        return best_score, best_move, search_total
     else:
         # Minimizing
         best_score = 10**12
@@ -117,13 +120,14 @@ def minimax(b: Board, depth: int, player: int, start_time: float, time_limit: fl
             row = b.play(col, -1)
             if b.is_win_at(row, col):
                 b.undo(col)
-                return -WIN_SCORE * depth, col
-            score, _ = minimax(b, depth-1, 1, start_time, time_limit)
+                return -WIN_SCORE * depth, col, search_total + 1
+            score, m, searched = minimax(b, depth-1, 1, start_time, time_limit)
+            search_total += searched
             b.undo(col)
             if score < best_score:
                 best_score = score
                 best_move = col
-        return best_score, best_move
+        return best_score, best_move, search_total
 
 # Iterative Deepening wrapper
 def iterative_deepening_move(b: Board, max_depth: int, time_limit: float):
@@ -139,9 +143,12 @@ def iterative_deepening_move(b: Board, max_depth: int, time_limit: float):
     best_move = None
     best_score = None
 
+    max_searched = 0
+
     for depth in range(1, max_depth + 1):
         try:
-            score, move = minimax(b, depth, player=1, start_time=start, time_limit=time_limit)
+            score, move, searched = minimax(b, depth, player=1, start_time=start, time_limit=time_limit)
+            max_searched = max(searched, max_searched)
             if move is not None:
                 best_move = move
                 best_score = score
@@ -155,4 +162,4 @@ def iterative_deepening_move(b: Board, max_depth: int, time_limit: float):
     if best_move is None:
         legals = b.legal_moves()
         best_move = legals[0] if legals else 0
-    return best_move, best_score
+    return best_move, best_score, max_searched

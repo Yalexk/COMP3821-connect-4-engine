@@ -1,0 +1,404 @@
+state: 32164625
+	Algorithm_Types.MINIMAX: 93920
+	Algorithm_Types.ABPRUNING: 16821
+	Algorithm_Types.TTABLE: 2934
+state: 6146
+	Algorithm_Types.MINIMAX: 75421
+	Algorithm_Types.ABPRUNING: 18375
+	Algorithm_Types.TTABLE: 5045
+state: 243335424257
+	Algorithm_Types.MINIMAX: 26691
+	Algorithm_Types.ABPRUNING: 11721
+	Algorithm_Types.TTABLE: 0
+state: 5512243243536
+	Algorithm_Types.MINIMAX: 53492
+	Algorithm_Types.ABPRUNING: 3433
+	Algorithm_Types.TTABLE: 2645
+state: 22144426444
+	Algorithm_Types.MINIMAX: 27174
+	Algorithm_Types.ABPRUNING: 7381
+	Algorithm_Types.TTABLE: 2028
+state: 265756512
+	Algorithm_Types.MINIMAX: 24071
+	Algorithm_Types.ABPRUNING: 8727
+	Algorithm_Types.TTABLE: 0
+state: 65444437612
+	Algorithm_Types.MINIMAX: 82317
+	Algorithm_Types.ABPRUNING: 8744
+	Algorithm_Types.TTABLE: 9316
+state: 17516442226766
+	Algorithm_Types.MINIMAX: 93035
+	Algorithm_Types.ABPRUNING: 14476
+	Algorithm_Types.TTABLE: 4166
+state: 7343363417254
+	Algorithm_Types.MINIMAX: 28269
+	Algorithm_Types.ABPRUNING: 1210
+	Algorithm_Types.TTABLE: 5094
+state: 74746315233
+	Algorithm_Types.MINIMAX: 29376
+	Algorithm_Types.ABPRUNING: 1905
+	Algorithm_Types.TTABLE: 2476
+state: 5654767662
+	Algorithm_Types.MINIMAX: 71912
+	Algorithm_Types.ABPRUNING: 20420
+	Algorithm_Types.TTABLE: 8892
+state: 74642572132
+	Algorithm_Types.MINIMAX: 41131
+	Algorithm_Types.ABPRUNING: 3539
+	Algorithm_Types.TTABLE: 1936
+state: 51756773145177
+	Algorithm_Types.MINIMAX: 12572
+	Algorithm_Types.ABPRUNING: 4516
+	Algorithm_Types.TTABLE: 0
+state: 165746146225
+	Algorithm_Types.MINIMAX: 39145
+	Algorithm_Types.ABPRUNING: 12429
+	Algorithm_Types.TTABLE: 0
+state: 1562527227511
+	Algorithm_Types.MINIMAX: 70248
+	Algorithm_Types.ABPRUNING: 9497
+	Algorithm_Types.TTABLE: 1973
+state: 43745416472735
+	Algorithm_Types.MINIMAX: 18242
+	Algorithm_Types.ABPRUNING: 7763
+	Algorithm_Types.TTABLE: 0
+state: 42434653771434
+	Algorithm_Types.MINIMAX: 77788
+	Algorithm_Types.ABPRUNING: 5255
+	Algorithm_Types.TTABLE: 7066
+state: 1626434452343
+	Algorithm_Types.MINIMAX: 21864
+	Algorithm_Types.ABPRUNING: 4595
+	Algorithm_Types.TTABLE: 2599
+state: 6513243566177
+	Algorithm_Types.MINIMAX: 59750
+	Algorithm_Types.ABPRUNING: 12981
+	Algorithm_Types.TTABLE: 5802
+state: 43623536647361
+	Algorithm_Types.MINIMAX: 83655
+	Algorithm_Types.ABPRUNING: 21904
+	Algorithm_Types.TTABLE: 4921
+state: 35544262
+	Algorithm_Types.MINIMAX: 74122
+	Algorithm_Types.ABPRUNING: 13203
+	Algorithm_Types.TTABLE: 5037
+state: 33375546411
+	Algorithm_Types.MINIMAX: 12808
+	Algorithm_Types.ABPRUNING: 3397
+	Algorithm_Types.TTABLE: 0
+state: 427631264721
+	Algorithm_Types.MINIMAX: 53753
+	Algorithm_Types.ABPRUNING: 4835
+	Algorithm_Types.TTABLE: 3966
+state: 51615567
+	Algorithm_Types.MINIMAX: 59139
+	Algorithm_Types.ABPRUNING: 9631
+	Algorithm_Types.TTABLE: 2329
+state: 543772563551
+	Algorithm_Types.MINIMAX: 48642
+	Algorithm_Types.ABPRUNING: 6946
+	Algorithm_Types.TTABLE: 2491
+state: 27534134362633
+	Algorithm_Types.MINIMAX: 59544
+	Algorithm_Types.ABPRUNING: 9228
+	Algorithm_Types.TTABLE: 6172
+state: 7234472553
+	Algorithm_Types.MINIMAX: 104396
+	Algorithm_Types.ABPRUNING: 16379
+	Algorithm_Types.TTABLE: 2784
+state: 6126741462153
+	Algorithm_Types.MINIMAX: 46046
+	Algorithm_Types.ABPRUNING: 7073
+	Algorithm_Types.TTABLE: 2257
+state: 4737
+	Algorithm_Types.MINIMAX: 44840
+	Algorithm_Types.ABPRUNING: 2606
+	Algorithm_Types.TTABLE: 6238
+state: 7675456251
+	Algorithm_Types.MINIMAX: 100194
+	Algorithm_Types.ABPRUNING: 25545
+	Algorithm_Types.TTABLE: 10528
+state: 737534232264
+	Algorithm_Types.MINIMAX: 16038
+	Algorithm_Types.ABPRUNING: 5047
+	Algorithm_Types.TTABLE: 0
+state: 2615522
+	Algorithm_Types.MINIMAX: 50218
+	Algorithm_Types.ABPRUNING: 8680
+	Algorithm_Types.TTABLE: 2347
+state: 37416146447
+	Algorithm_Types.MINIMAX: 32344
+	Algorithm_Types.ABPRUNING: 11151
+	Algorithm_Types.TTABLE: 0
+state: 14254
+	Algorithm_Types.MINIMAX: 80432
+	Algorithm_Types.ABPRUNING: 24973
+	Algorithm_Types.TTABLE: 8533
+state: 24657443354
+	Algorithm_Types.MINIMAX: 49016
+	Algorithm_Types.ABPRUNING: 24797
+	Algorithm_Types.TTABLE: 8529
+state: 421125247317
+	Algorithm_Types.MINIMAX: 46459
+	Algorithm_Types.ABPRUNING: 1063
+	Algorithm_Types.TTABLE: 4423
+state: 441672735
+	Algorithm_Types.MINIMAX: 94604
+	Algorithm_Types.ABPRUNING: 10983
+	Algorithm_Types.TTABLE: 6071
+state: 5416317226643
+	Algorithm_Types.MINIMAX: 69513
+	Algorithm_Types.ABPRUNING: 19264
+	Algorithm_Types.TTABLE: 3305
+state: 25545
+	Algorithm_Types.MINIMAX: 75551
+	Algorithm_Types.ABPRUNING: 28378
+	Algorithm_Types.TTABLE: 6747
+state: 716763353724
+	Algorithm_Types.MINIMAX: 55588
+	Algorithm_Types.ABPRUNING: 11986
+	Algorithm_Types.TTABLE: 4663
+state: 1242536267
+	Algorithm_Types.MINIMAX: 16543
+	Algorithm_Types.ABPRUNING: 4228
+	Algorithm_Types.TTABLE: 0
+state: 7311452532672
+	Algorithm_Types.MINIMAX: 33141
+	Algorithm_Types.ABPRUNING: 7167
+	Algorithm_Types.TTABLE: 4413
+state: 51322427
+	Algorithm_Types.MINIMAX: 80517
+	Algorithm_Types.ABPRUNING: 5243
+	Algorithm_Types.TTABLE: 4045
+state: 5276313436535
+	Algorithm_Types.MINIMAX: 26495
+	Algorithm_Types.ABPRUNING: 9336
+	Algorithm_Types.TTABLE: 0
+state: 47413665722
+	Algorithm_Types.MINIMAX: 24926
+	Algorithm_Types.ABPRUNING: 8726
+	Algorithm_Types.TTABLE: 0
+state: 13167624557
+	Algorithm_Types.MINIMAX: 60684
+	Algorithm_Types.ABPRUNING: 13641
+	Algorithm_Types.TTABLE: 3310
+state: 65225331
+	Algorithm_Types.MINIMAX: 105666
+	Algorithm_Types.ABPRUNING: 8031
+	Algorithm_Types.TTABLE: 4727
+state: 334275644
+	Algorithm_Types.MINIMAX: 55116
+	Algorithm_Types.ABPRUNING: 7732
+	Algorithm_Types.TTABLE: 6295
+state: 54622223337635
+	Algorithm_Types.MINIMAX: 11040
+	Algorithm_Types.ABPRUNING: 2871
+	Algorithm_Types.TTABLE: 0
+state: 7231776132635
+	Algorithm_Types.MINIMAX: 21066
+	Algorithm_Types.ABPRUNING: 9453
+	Algorithm_Types.TTABLE: 0
+state: 661613472611
+	Algorithm_Types.MINIMAX: 54490
+	Algorithm_Types.ABPRUNING: 27806
+	Algorithm_Types.TTABLE: 0
+state: 464652443565
+	Algorithm_Types.MINIMAX: 73359
+	Algorithm_Types.ABPRUNING: 42185
+	Algorithm_Types.TTABLE: 0
+state: 7336254227213
+	Algorithm_Types.MINIMAX: 60599
+	Algorithm_Types.ABPRUNING: 6969
+	Algorithm_Types.TTABLE: 4908
+state: 1475174
+	Algorithm_Types.MINIMAX: 53879
+	Algorithm_Types.ABPRUNING: 3793
+	Algorithm_Types.TTABLE: 4797
+state: 614213513
+	Algorithm_Types.MINIMAX: 56713
+	Algorithm_Types.ABPRUNING: 13867
+	Algorithm_Types.TTABLE: 0
+state: 657251234112
+	Algorithm_Types.MINIMAX: 75882
+	Algorithm_Types.ABPRUNING: 10414
+	Algorithm_Types.TTABLE: 2119
+state: 72247
+	Algorithm_Types.MINIMAX: 59651
+	Algorithm_Types.ABPRUNING: 4719
+	Algorithm_Types.TTABLE: 4656
+state: 43214726
+	Algorithm_Types.MINIMAX: 43099
+	Algorithm_Types.ABPRUNING: 3135
+	Algorithm_Types.TTABLE: 3559
+state: 313341
+	Algorithm_Types.MINIMAX: 62338
+	Algorithm_Types.ABPRUNING: 6777
+	Algorithm_Types.TTABLE: 4913
+state: 3637124766
+	Algorithm_Types.MINIMAX: 80656
+	Algorithm_Types.ABPRUNING: 12899
+	Algorithm_Types.TTABLE: 3366
+state: 45713322723
+	Algorithm_Types.MINIMAX: 45564
+	Algorithm_Types.ABPRUNING: 1940
+	Algorithm_Types.TTABLE: 2760
+state: 4161457576
+	Algorithm_Types.MINIMAX: 73659
+	Algorithm_Types.ABPRUNING: 17891
+	Algorithm_Types.TTABLE: 5206
+state: 4752514115
+	Algorithm_Types.MINIMAX: 61254
+	Algorithm_Types.ABPRUNING: 6142
+	Algorithm_Types.TTABLE: 3035
+state: 6571456427113
+	Algorithm_Types.MINIMAX: 54711
+	Algorithm_Types.ABPRUNING: 11133
+	Algorithm_Types.TTABLE: 4349
+state: 1425525276343
+	Algorithm_Types.MINIMAX: 39006
+	Algorithm_Types.ABPRUNING: 2603
+	Algorithm_Types.TTABLE: 3714
+state: 22347273731
+	Algorithm_Types.MINIMAX: 32602
+	Algorithm_Types.ABPRUNING: 21022
+	Algorithm_Types.TTABLE: 0
+state: 25144
+	Algorithm_Types.MINIMAX: 80432
+	Algorithm_Types.ABPRUNING: 24973
+	Algorithm_Types.TTABLE: 8533
+state: 32153635422
+	Algorithm_Types.MINIMAX: 14014
+	Algorithm_Types.ABPRUNING: 3421
+	Algorithm_Types.TTABLE: 0
+state: 4337377231257
+	Algorithm_Types.MINIMAX: 12283
+	Algorithm_Types.ABPRUNING: 3811
+	Algorithm_Types.TTABLE: 0
+state: 513432277262
+	Algorithm_Types.MINIMAX: 41482
+	Algorithm_Types.ABPRUNING: 4431
+	Algorithm_Types.TTABLE: 2329
+state: 76234731336425
+	Algorithm_Types.MINIMAX: 72801
+	Algorithm_Types.ABPRUNING: 5222
+	Algorithm_Types.TTABLE: 3356
+state: 523463127
+	Algorithm_Types.MINIMAX: 45958
+	Algorithm_Types.ABPRUNING: 2371
+	Algorithm_Types.TTABLE: 1850
+state: 76325166734314
+	Algorithm_Types.MINIMAX: 63935
+	Algorithm_Types.ABPRUNING: 14094
+	Algorithm_Types.TTABLE: 6625
+state: 72244
+	Algorithm_Types.MINIMAX: 59405
+	Algorithm_Types.ABPRUNING: 3040
+	Algorithm_Types.TTABLE: 4539
+state: 25362556661
+	Algorithm_Types.MINIMAX: 16671
+	Algorithm_Types.ABPRUNING: 6730
+	Algorithm_Types.TTABLE: 0
+state: 376645334561
+	Algorithm_Types.MINIMAX: 58532
+	Algorithm_Types.ABPRUNING: 14201
+	Algorithm_Types.TTABLE: 3236
+state: 34256765517435
+	Algorithm_Types.MINIMAX: 66948
+	Algorithm_Types.ABPRUNING: 8086
+	Algorithm_Types.TTABLE: 3441
+state: 6545423651
+	Algorithm_Types.MINIMAX: 72384
+	Algorithm_Types.ABPRUNING: 12383
+	Algorithm_Types.TTABLE: 3397
+state: 223331654
+	Algorithm_Types.MINIMAX: 62209
+	Algorithm_Types.ABPRUNING: 4906
+	Algorithm_Types.TTABLE: 2515
+state: 3574515645
+	Algorithm_Types.MINIMAX: 66994
+	Algorithm_Types.ABPRUNING: 11327
+	Algorithm_Types.TTABLE: 4553
+state: 4331773512476
+	Algorithm_Types.MINIMAX: 8822
+	Algorithm_Types.ABPRUNING: 2130
+	Algorithm_Types.TTABLE: 0
+state: 72122463145
+	Algorithm_Types.MINIMAX: 60291
+	Algorithm_Types.ABPRUNING: 7968
+	Algorithm_Types.TTABLE: 2647
+state: 74242117222573
+	Algorithm_Types.MINIMAX: 22228
+	Algorithm_Types.ABPRUNING: 8706
+	Algorithm_Types.TTABLE: 0
+state: 7313245
+	Algorithm_Types.MINIMAX: 82590
+	Algorithm_Types.ABPRUNING: 7666
+	Algorithm_Types.TTABLE: 3029
+state: 76727734653333
+	Algorithm_Types.MINIMAX: 53066
+	Algorithm_Types.ABPRUNING: 12085
+	Algorithm_Types.TTABLE: 2381
+state: 2231333175746
+	Algorithm_Types.MINIMAX: 67365
+	Algorithm_Types.ABPRUNING: 9491
+	Algorithm_Types.TTABLE: 6501
+state: 22523567532
+	Algorithm_Types.MINIMAX: 13247
+	Algorithm_Types.ABPRUNING: 6514
+	Algorithm_Types.TTABLE: 0
+state: 557455364765
+	Algorithm_Types.MINIMAX: 50893
+	Algorithm_Types.ABPRUNING: 9449
+	Algorithm_Types.TTABLE: 3450
+state: 12447313567113
+	Algorithm_Types.MINIMAX: 13320
+	Algorithm_Types.ABPRUNING: 4349
+	Algorithm_Types.TTABLE: 0
+state: 475262114
+	Algorithm_Types.MINIMAX: 19083
+	Algorithm_Types.ABPRUNING: 7219
+	Algorithm_Types.TTABLE: 0
+state: 1425241
+	Algorithm_Types.MINIMAX: 52200
+	Algorithm_Types.ABPRUNING: 9373
+	Algorithm_Types.TTABLE: 3937
+state: 624261
+	Algorithm_Types.MINIMAX: 60331
+	Algorithm_Types.ABPRUNING: 12633
+	Algorithm_Types.TTABLE: 4445
+state: 3334574745
+	Algorithm_Types.MINIMAX: 92628
+	Algorithm_Types.ABPRUNING: 20674
+	Algorithm_Types.TTABLE: 2608
+state: 545355462
+	Algorithm_Types.MINIMAX: 72375
+	Algorithm_Types.ABPRUNING: 13166
+	Algorithm_Types.TTABLE: 4780
+state: 7344247763144
+	Algorithm_Types.MINIMAX: 18958
+	Algorithm_Types.ABPRUNING: 4591
+	Algorithm_Types.TTABLE: 0
+state: 735537451656
+	Algorithm_Types.MINIMAX: 25375
+	Algorithm_Types.ABPRUNING: 12256
+	Algorithm_Types.TTABLE: 0
+state: 6524141431
+	Algorithm_Types.MINIMAX: 27018
+	Algorithm_Types.ABPRUNING: 8010
+	Algorithm_Types.TTABLE: 0
+state: 13116246361136
+	Algorithm_Types.MINIMAX: 11432
+	Algorithm_Types.ABPRUNING: 5532
+	Algorithm_Types.TTABLE: 0
+state: 6116442561763
+	Algorithm_Types.MINIMAX: 67780
+	Algorithm_Types.ABPRUNING: 13211
+	Algorithm_Types.TTABLE: 3694
+state: 624741213
+	Algorithm_Types.MINIMAX: 28888
+	Algorithm_Types.ABPRUNING: 11635
+	Algorithm_Types.TTABLE: 0
+state: 256613535637
+	Algorithm_Types.MINIMAX: 91574
+	Algorithm_Types.ABPRUNING: 12128
+	Algorithm_Types.TTABLE: 8392

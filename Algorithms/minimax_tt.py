@@ -13,6 +13,9 @@ class MinimaxWithTranspositionTable:
         self.max_depth = 8  # Default depth
         self.time_limit = 2.0  # Default time limit
     
+    def get_nodes_searched(self):
+        return self.nodes_searched
+
     def make_move(self, board: Board, debug_mode: bool = False) -> Tuple[int, int]:
         """
         Make a move using iterative deepening with transposition table

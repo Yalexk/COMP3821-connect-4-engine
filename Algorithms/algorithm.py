@@ -14,3 +14,6 @@ class Algorithm:
 
     def set_evaluation_function(self, function):
         pass
+
+    def get_nodes_searched(self):
+        pass
