@@ -15,6 +15,8 @@ TIME_LIMIT_SEC = 2.0
 
 WIN_SCORE = 10000
 
+# Toggles
+PV_ordering = True
 def evaluate(b: Board) -> int:
     """
     score = center_score + sum(4-length_window_score)
@@ -75,7 +77,7 @@ class TimeUp(Exception):
     """Raised when the per-move time limit is exceeded."""
     pass
 
-def minimax(b: Board, depth: int, player: int, start_time: float, time_limit: float | None):
+def minimax(b: Board, depth: int, player: int, start_time: float, time_limit: float | None, best_move: int = None):
     """
     Very simple minimax:
       - 'player' is +1 for side to move, -1 for opponent.
@@ -91,7 +93,7 @@ def minimax(b: Board, depth: int, player: int, start_time: float, time_limit: fl
     if depth == 0 or b.is_full():
         return evaluate(b) * player, None
 
-    legal = b.legal_moves()
+    legal = b.centre_legal_moves()
     if not legal:
         return 0, None
 
@@ -125,7 +127,7 @@ def minimax(b: Board, depth: int, player: int, start_time: float, time_limit: fl
                 best_move = col
         return best_score, best_move
 
-# Iterative Deepening wrapper
+# Iterative Deepening wrapper 
 def iterative_deepening_move(b: Board, max_depth: int, time_limit: float):
     """
     for depth = 1..max_depth:
@@ -141,7 +143,10 @@ def iterative_deepening_move(b: Board, max_depth: int, time_limit: float):
 
     for depth in range(1, max_depth + 1):
         try:
-            score, move = minimax(b, depth, player=1, start_time=start, time_limit=time_limit)
+            if PV_ordering:
+                score, move = minimax(b, depth, player=1, start_time=start, time_limit=time_limit, best_move=best_move)
+            else:
+                score, move = minimax(b, depth, player=1, start_time=start, time_limit=time_limit)
             if move is not None:
                 best_move = move
                 best_score = score
